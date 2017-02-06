@@ -1,0 +1,33 @@
+{
+  "name": "nodejs-boilerplate",
+  "version": "1.0.0",
+  "description": "A Node.js boilerplate for future nodejs projects",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Rohail1/nodejs-boilerplate.git"
+  },
+  "keywords": [
+    "nodejs",
+    "node",
+    "javascript",
+    "es6",
+    "mongoose",
+    "mongodb",
+    "backend",
+    "server"
+  ],
+  "author": "Rohail Najam <rohail_najam@hotmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Rohail1/nodejs-boilerplate/issues"
+  },
+  "homepage": "https://github.com/Rohail1/nodejs-boilerplate#readme",
+  "dependencies": {
+    "express": "^4.14.1",
+    "morgan": "^1.8.0"
+  }
+}
