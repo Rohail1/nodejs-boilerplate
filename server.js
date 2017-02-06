@@ -7,7 +7,7 @@ let app = express();
 app.locals.env = process.env.NODE_ENV = process.env.NODE_ENV || "development";
 app.locals.title = "Project Name";
 const config = require('./configs/config')(app.locals.env);
-const dependencies = require('./libs/dependencies')(app,express,config);
+const dependencies = require('./Libs/dependencies')(app,express,config);
 require('./Configs/express')(dependencies);
 
 app.listen(config.port,() => {

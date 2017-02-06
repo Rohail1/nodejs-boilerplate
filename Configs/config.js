@@ -71,4 +71,4 @@ function returnConfiguration(env) {
   return configurations[env];
 }
 
-modules.exports = returnConfiguration;
+module.exports = returnConfiguration;

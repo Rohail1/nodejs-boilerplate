@@ -5,8 +5,8 @@
 module.exports = function (app, express,config) {
 
   const mongoose = require('mongoose'),
-    dbConnection  = require('./mongo')(config, mongoose),
-    models  = require('../models/nosql/index')(mongoose)
+    dbConnection  = require('../Configs/mongo')(config, mongoose),
+    models  = require('../models/index')(mongoose);
 
   return {
     app : app,
