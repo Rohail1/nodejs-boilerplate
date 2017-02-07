@@ -2,23 +2,26 @@
  * Created by Rohail Najam on 2/6/2017.
  */
 
-module.exports = function (dependencies) {
+module.exports = function (dependencies,helper) {
 
-  let router  = express.Router();
-
+  let router  = dependencies.express.Router();
+  let middlewares = require('../Middlewares/index')(dependencies);
+  
+  
 
   function setup(dir) {
-    let items = fs.readdirSync(dir);
+    let items = dependencies.fs.readdirSync(dir);
 
     items.forEach(function (item) {
-      let fullPath = path.join(dir, item),
-        st = fs.statSync(fullPath);
+      let fullPath = dependencies.path.join(dir, item),
+        st = dependencies.fs.statSync(fullPath);
 
       if (st.isDirectory()) {
         setup(fullPath);
       } else {
         if (/\.js$/i.test(item)) {
-          require(fullPath).setupFunction(dependencies);
+          let validators = require(dependencies.config.rootPath+dependencies.path.join(dependencies.config.VALIDATOR_DIR,item))(dependencies);
+          require(fullPath).setupFunction(dependencies,helper,middlewares.ROUTE,validators);
           registerAPI(require(fullPath).APIs);
         }
       }
@@ -28,12 +31,16 @@ module.exports = function (dependencies) {
   function registerAPI(module) {
     for(let prop in module){
       if(module.hasOwnProperty(prop)){
-        registerMethod(module[prop].method,module[prop].prefix.concat(module[prop].route),module[prop].handler)
+        registerMethod(
+          module[prop].method,
+          module[prop].prefix.concat(module[prop].route),
+          module[prop].handler,
+          module[prop].middlewares)
       }
     }
   }
 
-  function registerMethod(method,route,handler) {
+  function registerMethod(method,route,handler,middlewares) {
 
     switch (method){
       case 'GET' :
@@ -54,7 +61,15 @@ module.exports = function (dependencies) {
     }
   }
 
+  function registerAPPLevelMiddleware(middlewares) {
+    for(let value of middlewares)
+      dependencies.app.use(value);
+  }
+
+  registerAPPLevelMiddleware(middlewares.APP);
+
   setup(dependencies.config.rootPath+dependencies.config.API_DIR);
+
   dependencies.app.use(router);
 
 };

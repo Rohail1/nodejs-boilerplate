@@ -16,8 +16,13 @@ module.exports = function (app, express,config) {
     bodyParser :require('body-parser'),
     cors : require('cors'),
     mongoose : mongoose,
+    fs : require('fs-extra'),
     dbConnection : dbConnection,
-    models : models
+    models : models,
+    messages : require('../Configs/messages'),
+    path : require('path'),
+    co : require('co'),
+    joi : require('joi')
   }
 
 };

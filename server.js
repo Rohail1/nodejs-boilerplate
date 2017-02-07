@@ -9,6 +9,8 @@ app.locals.title = "Project Name";
 const config = require('./configs/config')(app.locals.env);
 const dependencies = require('./Libs/dependencies')(app,express,config);
 require('./Configs/express')(dependencies);
+let helpers = require('./Libs/helper')(dependencies);
+require('./Routes/routes')(dependencies,helpers);
 
 app.listen(config.port,() => {
 

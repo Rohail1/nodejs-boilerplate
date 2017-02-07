@@ -3,7 +3,7 @@
  */
 
 
-module.exports=  function (mongoose) {
+module.exports=  function ({mongoose}) {
 
 
   let helpers = {

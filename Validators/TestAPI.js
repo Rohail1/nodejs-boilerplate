@@ -2,15 +2,15 @@
  * Created by Rohail Najam on 2/6/2017.
  */
 
-module.exports = function (co, joi) {
+module.exports = function ({joi}) {
 
-  validatePostUsers = function* (input) {
+  validatePostUsers = function (input) {
     let schema = joi.object().keys({
-      firstName:joi.string().token().required(),
-      lastName: joi.string().token().required()
+      firstName:joi.string().token().required().error(new Error('Please enter firstName')),
+      lastName: joi.string().token().required().error(new Error('Please enter lastName'))
     });
     try {
-      return yield joi.validate(input,schema);
+      return joi.validate(input,schema);
     }
     catch (ex){
       return ex;
@@ -18,7 +18,7 @@ module.exports = function (co, joi) {
   };
 
   return  {
-    validatePostUsers : co.wrap(validatePostUsers)
+    validatePostUsers : validatePostUsers
   }
 
 };

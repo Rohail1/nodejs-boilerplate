@@ -1,6 +1,6 @@
 
 
-module.exports.setupFunction = function ({config,helper,messages,models},helper,middlewares,validator) {
+module.exports.setupFunction = function ({config,messages,models,co},helper,middlewares,validator) {
 
   function getUsers(req,res) {
 
@@ -8,18 +8,20 @@ module.exports.setupFunction = function ({config,helper,messages,models},helper,
       .then(function (data) {
         return helper.sendResponse(res,messages.SUCCESSFUL,data)
       }).catch(function (error) {
-        return helper.sendError(res,error)
+      return helper.sendError(res,error)
     })
   }
 
-  function postUser(req,res) {
+  function* postUser(req,res) {
     try {
-      let validated = validator.validatePostUsers(req.inputs);
+      let validated = yield validator.validatePostUsers(req.body);
       if(validated.error)
         throw new Error(validated.error.message);
-
+      let user = new models.User();
+      user._id = helper.generateObjectId();
+      return helper.sendResponse(res,messages.SUCCESSFUL);
     } catch (ex){
-      return helper.sendError(res,error)
+      return helper.sendError(res,ex)
     }
   }
 
@@ -29,13 +31,15 @@ module.exports.setupFunction = function ({config,helper,messages,models},helper,
       route : '/users',
       method : 'GET',
       prefix : config.API_PREFIX.API,
+      middlewares : [middlewares.dummyRouteLevelMiddleware2],
       handler : getUsers
     },
     postUser : {
       route : '/users',
       method : 'POST',
       prefix : config.API_PREFIX.API,
-      handler : postUser
+      middlewares : [middlewares.dummyRouteLevelMiddleware2,middlewares.dummyRouteLevelMiddleware1], //FIFO order of middleware
+      handler : co.wrap(postUser)
     }
 
   };

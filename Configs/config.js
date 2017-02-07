@@ -21,6 +21,7 @@ const configurations = {
     },
     logStyle : 'dev',
     API_DIR : '/APIs',
+    VALIDATOR_DIR : '/Validators',
     API_PREFIX : {
       API : '/api',
       AUTH : '/auth'
@@ -40,6 +41,7 @@ const configurations = {
       }
     },
     API_DIR : '/APIs',
+    VALIDATOR_DIR : '/Validators',
     API_PREFIX : {
       API : '/api',
       AUTH : '/auth'
@@ -51,6 +53,7 @@ const configurations = {
     rootPath : rootPath,
     logStyle : 'combined',
     API_DIR : '/APIs',
+    VALIDATOR_DIR : '/Validators',
     API_PREFIX : {
       API : '/api',
       AUTH : '/auth'
