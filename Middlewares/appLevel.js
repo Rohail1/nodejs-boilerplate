@@ -8,10 +8,6 @@ module.exports = function ({mongoose}) {
   // This middleware get all the inputs from params ,query ,body and place them in req.inputs
   function getInputs (req, res, next) {
     req.inputs = {};
-    for(let prop in  req.params) {
-      if(req.params.hasOwnProperty(prop))
-        req.inputs[prop] = req.params[prop];
-    }
     for(let prop in  req.body) {
       if(req.body.hasOwnProperty(prop))
         req.inputs[prop] = req.body[prop];

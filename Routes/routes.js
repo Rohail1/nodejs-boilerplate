@@ -44,26 +44,25 @@ module.exports = function (dependencies,helper) {
 
     switch (method){
       case 'GET' :
-        router.get(route,handler);
+        router.get(route,middlewares,handler);
         break;
       case 'POST' :
-        router.post(route,handler);
+        router.post(route,middlewares,handler);
         break;
       case 'PUT' :
-        router.put(route,handler);
+        router.put(route,middlewares,handler);
         break;
       case 'DELETE' :
-        router.delete(route,handler);
+        router.delete(route,middlewares,handler);
         break;
       default :
-        console.log('Unknow route ',method);
+        console.log('Unknown method ',method);
         break;
     }
   }
 
   function registerAPPLevelMiddleware(middlewares) {
-    for(let value of middlewares)
-      dependencies.app.use(value);
+      dependencies.app.use(middlewares);
   }
 
   registerAPPLevelMiddleware(middlewares.APP);
