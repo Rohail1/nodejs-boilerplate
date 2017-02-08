@@ -20,7 +20,7 @@ Add your Route-level or App-level middlewares in the Middlewares directory in th
       ->appLevel.js
       ->routeLevel
      
-Make your the order of your APP level middleware is correct as it follows First-In-First-Out Orders so the middleware placed first in the array will be used first in the app.</br>
+Make sure the order of your APP level middleware is correct as it follows First-In-First-Out Orders so the middleware placed first in the array will be used first in the app.</br>
 As for Route level middlewares you can register them when you register the route.
 
 
@@ -50,6 +50,6 @@ For writing APIs create a file in the APIs folder By following the structure of 
 Name the validator file should be same as the API file for which the validators are being created and they will automatically be imported in the API file through parameters. I have used <a href=https://github.com/hapijs/joi/blob/master/API.md>Joi</a> for validation.Its great validation library.
  
 ###Models
-Models folder contains mongoose models for your schemas.Add new model schemas and register/require them in Models/index.js for they can be loaded and exposed to entire app.
+Models folder contains mongoose models for your schemas.Add new model schemas and register/require them in Models/index.js so they can be loaded and exposed to entire app.
  
  
