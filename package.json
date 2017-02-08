@@ -16,6 +16,8 @@
     "node",
     "javascript",
     "es6",
+    "joi",
+    "express",
     "mongoose",
     "mongodb",
     "backend",
