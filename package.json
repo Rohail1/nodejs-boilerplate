@@ -4,6 +4,7 @@
   "description": "A Node.js boilerplate for future nodejs projects",
   "main": "server.js",
   "scripts": {
+    "start" : "node server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
