@@ -9,15 +9,10 @@ const rootPath = path.normalize(__dirname+"/../");
 const configurations = {
 
   development : {
-    port : 3000,
+    port : process.env.PORT,
     rootPath : rootPath,
     db: {
-      name : "db Name",
-      mongo : {
-        connectionString : process.env.MONGOPATH || "mongodb://localhost:27017/dbName",
-        username : process.env.MONGOUSERNAME || '',
-        password : process.env.MONGOPASSWORD || ''
-      }
+      name : "db Name"
     },
     logStyle : 'dev',
     API_DIR : '/APIs',
@@ -33,12 +28,7 @@ const configurations = {
     rootPath : rootPath,
     logStyle : 'combined',
     db: {
-      name : "db Name",
-      mongo : {
-        connectionString : process.env.MONGOPATH || "mongodb://localhost:27017/dbName",
-        username : process.env.MONGOUSERNAME || '',
-        password : process.env.MONGOPASSWORD || ''
-      }
+      name : "db Name"
     },
     API_DIR : '/APIs',
     VALIDATOR_DIR : '/Validators',
@@ -59,12 +49,7 @@ const configurations = {
       AUTH : '/auth'
     },
     db: {
-      name : "db Name",
-      mongo : {
-        connectionString : process.env.MONGOPATH || "mongodb://localhost:27017/dbName",
-        username : process.env.MONGOUSERNAME || '',
-        password : process.env.MONGOPASSWORD || ''
-      }
+      name : "db Name"
     },
   }
 };

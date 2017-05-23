@@ -1,11 +1,11 @@
 
 function dbConnections (config,mongoose) {
 
-  mongoose.connect(config.db.mongo.connectionString);
+  mongoose.connect(process.env.DB_HOST);
   const db = mongoose.connection;
   mongoose.Promise = global.Promise;
   db.on('error', console.error.bind(console,'Error in Connection :: Cannot Connect to ' +config.db.name));
-  db.once('open',function () {
+  db.once('open', () => {
     console.log('Successfully Connected to Mongo Database ',config.db.name);
   });
   return db;

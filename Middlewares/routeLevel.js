@@ -8,27 +8,26 @@ module.exports = function ({mongoose}) {
 
   // This middleware gets Params and add them in req.inputs
 
-  function getParams(req, res, next) {
+  const getParams = (req, res, next) => {
     for(let prop in  req.params) {
       if(req.params.hasOwnProperty(prop))
         req.inputs[prop] = req.params[prop];
     }
     next();
-  }
+  };
 
-  function dummyRouteLevelMiddleware1(req, res, next) {
-    console.log('Hello');
+  const dummyRouteLevelMiddleware1 = (req, res, next) => {
     next();
-  }
+  };
 
-  function dummyRouteLevelMiddleware2(req, res, next) {
-    console.log('Hello2');
+  const dummyRouteLevelMiddleware2 = (req, res, next) => {
     next();
-  }
+  };
+
   return {
-    dummyRouteLevelMiddleware1 : dummyRouteLevelMiddleware1,
-    dummyRouteLevelMiddleware2 : dummyRouteLevelMiddleware2,
-    getParams : getParams
+    dummyRouteLevelMiddleware1,
+    dummyRouteLevelMiddleware2,
+    getParams
   }
 
 };
