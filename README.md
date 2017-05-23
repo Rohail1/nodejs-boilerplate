@@ -41,7 +41,7 @@ For writing APIs create a file in the APIs folder By following the structure of 
           method : 'DELETE',
           prefix : config.API_PREFIX.API,
           middlewares : [middlewares.getParams], //FIFO order of middleware
-          handler : co.wrap(deleteUser)
+          handler : deleteUser
         }
     
       };
@@ -52,4 +52,7 @@ Name the validator file should be same as the API file for which the validators 
 ### Models
 Models folder contains mongoose models for your schemas.Add new model schemas and register/require them in Models/index.js so they can be loaded and exposed to entire app.
  
+ ### Envs
+ 
+ This folder contain env files for each environment i.e development, production and staging. Make sure to add this folder in .gitignore ! In these files you can specify your db connection strings, port and API credentials or keys. Once decleared a variable in env file it will be accessible throught the app via `process.env` varaible. 
  
