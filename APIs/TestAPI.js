@@ -2,56 +2,59 @@
 
 module.exports.setupFunction = function ({config,messages,models,co},helper,middlewares,validator) {
 
-  function getUsers(req,res) {
-
+  const getUsers = (req,res) => {
     try {
       models.User.find({})
         .then(function (data) {
           return helper.sendResponse(res,messages.SUCCESSFUL,data)
-        }).catch(function (error) {
+        })
+        .catch(function (error) {
         return helper.sendError(res,error)
       })
     }catch (ex){
       return helper.sendError(res,ex)
     }
-  }
+  };
 
-  function* postUser(req,res) {
+  const postUser = async (req,res) => {
     try {
-      let validated = yield validator.validatePostUsers(req.inputs);
+      let validated = await validator.validatePostUsers(req.inputs);
       if(validated.error)
-        throw new Error(validated.error.message);
+        return helper.sendError(res,validated.error);
       let user = new models.User();
       user._id = helper.generateObjectId();
       user.firstName = req.inputs.firstName;
       user.lastName = req.inputs.lastName;
-      yield user.save();
+      await user.save();
       return helper.sendResponse(res,messages.SUCCESSFUL,user);
     } catch (ex){
       return helper.sendError(res,ex)
     }
-  }
+  };
 
-  function* updateUser(req,res) {
+  const updateUser = async (req,res) => {
     try {
-      let validated = yield validator.validateUpdateUsers(req.inputs);
+      let validated = await validator.validateUpdateUsers(req.inputs);
       if(validated.error)
-        throw new Error(validated.error.message);
-      let user = yield models.User.findOne({_id : helper.generateObjectId(req.inputs.userId)});
-      user.firstName = req.inputs.firstName;
-      yield user.save();
+        return helper.sendError(res,validated.error);
+      let user = await models.User.findOneAndUpdate({_id : helper.generateObjectId(req.inputs.userId)},
+        {
+          $set : {
+            firstName : req.inputs.firstName
+          }
+        },{new : true});
       return helper.sendResponse(res,messages.SUCCESSFUL,user);
     } catch (ex){
       return helper.sendError(res,ex)
     }
-  }
+  };
 
-  function* deleteUser(req,res) {
+  const deleteUser =  async (req,res) => {
     try {
-      let validated = yield validator.validateUpdateUsers(req.inputs);
+      let validated = await validator.validateUpdateUsers(req.inputs);
       if(validated.error)
-        throw new Error(validated.error.message);
-      yield models.User.remove({_id : helper.generateObjectId(req.inputs.userId)});
+        return helper.sendError(res,validated.error);
+      await models.User.remove({_id : helper.generateObjectId(req.inputs.userId)});
       return helper.sendResponse(res,messages.SUCCESSFUL);
     } catch (ex){
       return helper.sendError(res,ex)

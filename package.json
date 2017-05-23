@@ -31,7 +31,6 @@
   "homepage": "https://github.com/Rohail1/nodejs-boilerplate#readme",
   "dependencies": {
     "body-parser": "^1.16.1",
-    "co": "^4.6.0",
     "cors": "^2.8.1",
     "express": "^4.14.1",
     "fs-extra": "^2.0.0",
