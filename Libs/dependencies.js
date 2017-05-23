@@ -8,7 +8,7 @@ module.exports = function (app, express,config) {
     dbConnection  = require('../Configs/mongo')(config, mongoose),
     models  = require('../Models/index')(mongoose);
 
-  return {
+  const dependencies = {
     app : app,
     express : express,
     config : config,
@@ -22,6 +22,9 @@ module.exports = function (app, express,config) {
     messages : require('../Configs/messages'),
     path : require('path'),
     joi : require('joi')
-  }
+  };
+
+  require('../Configs/express')(dependencies);
+  return dependencies;
 
 };

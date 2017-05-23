@@ -7,9 +7,8 @@ let app = express();
 app.locals.env = process.env.NODE_ENV = process.env.NODE_ENV || "development";
 app.locals.title = "Project Name";
 require('dotenv').config({path : require('./Configs/envConfigs')(app.locals.env)});
-const config = require('./Configs/config')(app.locals.env);
+const config = require('./Configs')(app.locals.env);
 const dependencies = require('./Libs/dependencies')(app,express,config);
-require('./Configs/express')(dependencies);
 let helpers = require('./Libs/helper')(dependencies);
 require('./Routes')(dependencies,helpers);
 
