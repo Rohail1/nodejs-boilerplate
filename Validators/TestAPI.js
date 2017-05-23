@@ -4,7 +4,7 @@
 
 module.exports = function ({joi}) {
 
-  validatePostUsers = function (input) {
+  const validatePostUsers = (input) => {
     let schema = joi.object().keys({
       firstName:joi.string().token().required().error(new Error('Please enter firstName')),
       lastName: joi.string().token().required().error(new Error('Please enter lastName'))
@@ -16,7 +16,7 @@ module.exports = function ({joi}) {
       return ex;
     }
   };
-  validateUpdateUsers = function (input) {
+  const validateUpdateUsers = (input) => {
     let schema = joi.object().keys({
       firstName:joi.string().token().required().error(new Error('Please enter firstName')),
       userId:joi.string().token().required().error(new Error('invalid UserId'))
@@ -30,8 +30,8 @@ module.exports = function ({joi}) {
   };
 
   return  {
-    validatePostUsers : validatePostUsers,
-    validateUpdateUsers : validateUpdateUsers
+    validatePostUsers,
+    validateUpdateUsers,
   }
 
 };
