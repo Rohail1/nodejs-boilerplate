@@ -6,7 +6,7 @@ module.exports = function (app, express,config) {
 
   const mongoose = require('mongoose'),
     dbConnection  = require('../Configs/mongo')(config, mongoose),
-    models  = require('../models/index')(mongoose);
+    models  = require('../Models/index')(mongoose);
 
   return {
     app : app,
