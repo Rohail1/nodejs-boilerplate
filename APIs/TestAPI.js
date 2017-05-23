@@ -1,6 +1,6 @@
 
 
-module.exports.setupFunction = function ({config,messages,models,co},helper,middlewares,validator) {
+module.exports.setupFunction = function ({config,messages,models},helper,middlewares,validator) {
 
   const getUsers = (req,res) => {
     try {
@@ -59,7 +59,7 @@ module.exports.setupFunction = function ({config,messages,models,co},helper,midd
     } catch (ex){
       return helper.sendError(res,ex)
     }
-  }
+  };
 
   module.exports.APIs = {
 
@@ -75,21 +75,21 @@ module.exports.setupFunction = function ({config,messages,models,co},helper,midd
       method : 'POST',
       prefix : config.API_PREFIX.API,
       middlewares : [middlewares.dummyRouteLevelMiddleware2,middlewares.dummyRouteLevelMiddleware1], //FIFO order of middleware
-      handler : co.wrap(postUser)
+      handler : postUser
     },
     updateUser : {
       route : '/users/:userId',
       method : 'PUT',
       prefix : config.API_PREFIX.API,
       middlewares : [middlewares.getParams], //FIFO order of middleware
-      handler : co.wrap(updateUser)
+      handler : updateUser
     },
     deleteUser : {
       route : '/users/:userId',
       method : 'DELETE',
       prefix : config.API_PREFIX.API,
       middlewares : [middlewares.getParams], //FIFO order of middleware
-      handler : co.wrap(deleteUser)
+      handler : deleteUser
     }
 
   };

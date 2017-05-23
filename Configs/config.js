@@ -9,7 +9,7 @@ const rootPath = path.normalize(__dirname+"/../");
 const configurations = {
 
   development : {
-    port : 3000,
+    port : process.env.PORT,
     rootPath : rootPath,
     db: {
       name : "db Name"

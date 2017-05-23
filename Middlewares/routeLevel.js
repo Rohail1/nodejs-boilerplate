@@ -17,12 +17,10 @@ module.exports = function ({mongoose}) {
   };
 
   const dummyRouteLevelMiddleware1 = (req, res, next) => {
-    console.log('Hello');
     next();
   };
 
   const dummyRouteLevelMiddleware2 = (req, res, next) => {
-    console.log('Hello2');
     next();
   };
 

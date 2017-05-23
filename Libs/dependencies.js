@@ -21,7 +21,6 @@ module.exports = function (app, express,config) {
     models : models,
     messages : require('../Configs/messages'),
     path : require('path'),
-    co : require('co'),
     joi : require('joi')
   }
 
